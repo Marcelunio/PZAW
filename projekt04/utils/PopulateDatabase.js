@@ -28,8 +28,19 @@ database.exec(
      (
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL ,
-        body TEXT NOT NULL
+        body TEXT NOT NULL ,
+        author_id INTEGER
      );`)
+
+database.exec(
+`CREATE TABLE IF NOT EXISTS "users" 
+(
+   id INTEGER PRIMARY KEY,
+   login TEXT NOT NULL, 
+   password TEXT NOT NULL,
+   username TEXT NOT NULL
+);`)
+
 
 database.exec(
    `INSERT INTO entries(title,body) VALUES ('NIKON D500','${lorem_ipsum}'),('Canon EOS r50','${lorem_ipsum}'),('NIKON Z50 II','${lorem_ipsum}') `

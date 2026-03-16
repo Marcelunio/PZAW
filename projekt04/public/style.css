@@ -10,18 +10,18 @@ html
     --tile-color:cadetblue;
     --footer-color:rgb(204, 179, 190);
     --text-color-normal: #000;
-    
+    --icon-color: transparent;
     background-color: var(--background);
     color: var(--text-color-normal);
 }
-html[form-theme='dark'] {
+html[data-theme='dark'] {
     --header-color: rgb(14, 8, 51);
     --background: rgb(26, 21, 2);
     --main-color: rgb(36, 36, 36);
     --tile-color:rgb(194, 171, 72);
     --footer-color:rgb(9, 56, 5);
     --text-color-normal: #e9e9e9;
-
+    --icon-color: white;
     background-color: var(--background);
     color: var(--text-color-normal);
 }
@@ -125,6 +125,7 @@ a
     height: 30px;
     width: 30px;
     background-size:30px 30px;
+    background-color: var(--icon-color);
     cursor:pointer;
     border: none;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html  data-theme="<%- app.theme %>" lang="pl">
 <head>
     <meta charset ="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +13,7 @@
     <h1>Obiektywnie</h1>
     </a>
 </header>
+<section>
   <a href="/settings/toggle-theme?next=<%- encodeURIComponent(page) %>">
         <% if (app.theme === "dark") { %>
         <strong>Ciemny</strong> | Jasny
@@ -20,3 +21,4 @@
         Ciemny | <strong>Jasny</strong>
         <% } %>
       </a>
+</section>

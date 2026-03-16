@@ -16,7 +16,7 @@ export function themeToggle(req, res) {
 
 export function getSettings(req) {
   const settings = {
-    theme: req.cookies[THEME_COOKIE] || "dark",
+    theme: req.cookies[THEME_COOKIE] || "light",
   };
   return settings;
 }

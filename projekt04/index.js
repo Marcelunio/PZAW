@@ -1,9 +1,9 @@
 import express from "express"
-import forum, { hasEntry } from './model/forum.js';
+import forum, { hasEntry } from './model/entries.js';
 import cookieParser from "cookie-parser";
 import settings from "./model/settings.js";
 
-const port=8000;
+const port = process.env.PORT || 8000;
 
 const app=express()
 app.set("view engine","ejs")
