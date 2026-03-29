@@ -137,3 +137,16 @@ h1
 {
     text-align: center;
 }
+#settings
+{
+    display: flex;
+    flex-flow: row nowrap ;
+
+}
+#settings a,p {
+    flex-basis: 1;
+    display: flex;
+    flex-flow: row nowrap ;
+    justify-content: center;
+    align-items: center;
+}

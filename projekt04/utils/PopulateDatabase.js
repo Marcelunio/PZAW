@@ -32,17 +32,37 @@ database.exec(
         author_id INTEGER
      );`)
 
-database.exec(
-`CREATE TABLE IF NOT EXISTS "users" 
-(
-   id INTEGER PRIMARY KEY,
-   login TEXT NOT NULL, 
-   password TEXT NOT NULL,
-   username TEXT NOT NULL
-);`)
+database.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    user_id         INTEGER PRIMARY KEY,
+    username        TEXT UNIQUE,
+    passhash        TEXT,
+    created_at      INTEGER
+    ) STRICT;
+  `);
+database.exec(`
+  CREATE TABLE IF NOT EXISTS sesje (
+    id              INTEGER PRIMARY KEY,
+    user_id         INTEGER,
+    created_at      INTEGER
+  ) STRICT;
+  `);
 
 
 database.exec(
    `INSERT INTO entries(title,body) VALUES ('NIKON D500','${lorem_ipsum}'),('Canon EOS r50','${lorem_ipsum}'),('NIKON Z50 II','${lorem_ipsum}') `
 )
+
+
+export async function createAdmin(username, password,id) {
+  let existing_user = db_ops.find_by_username.get(username);
+
+  if (existing_user != null) {
+    return null;
+  }
+  let createdAt = Date.now();
+  let passhash = await argon2.hash(password, HASH_PARAMS);
+
+  return db_ops.create_user.get(username, passhash, createdAt,id);
+}
 database.close()

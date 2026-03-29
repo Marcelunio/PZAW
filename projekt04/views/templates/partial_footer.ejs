@@ -1,3 +1,7 @@
+<% if(app.cookie_consent== null)
+{%>
+<%- include("./cookie_consent.ejs"); %>
+<% } %>
 <footer>
 <p>Website made by Marcel Zieliński IIIc</p>
 </footer>

@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file .env ./index.js",
-    "populate_db": "node utils/populate_db.js",
+    "populate_db": "node utils/PopulateDatabase.js",
     "generate_env": "./utils/generate_env.sh > .env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -7,8 +7,9 @@ const database= new DatabaseSync(db_path)
 const database_operations = {
 
     get_entries: database.prepare("SELECT * FROM entries; "),
-    get_entry: database.prepare("SELECT title,body FROM entries WHERE id = ?; "),
-    post_entry: database.prepare("INSERT INTO entries(title,body) VALUES (?,?) "),
+    get_entry: database.prepare("SELECT title,body,author_id FROM entries WHERE id = ?; "),
+    get_author: database.prepare("SELECT author_id FROM entries WHERE id = ?; "),
+    post_entry: database.prepare("INSERT INTO entries(title,body,author_id) VALUES (?,?,?) "),
     delete_entry: database.prepare('DELETE FROM entries WHERE id=?;'),
     update_entry: database.prepare('UPDATE entries SET title=?, body=? WHERE id=? ;')
 }
@@ -28,7 +29,7 @@ export function checkEntry(entry)
 }
 export function postEntry(entry)
 {
-    database_operations.post_entry.run(entry.title,entry.body)
+    database_operations.post_entry.run(entry.title,entry.body,entry.author_id)
 }
 
 export function getEntries()
@@ -57,6 +58,12 @@ export function deleteEntry(id)
     return false
 }
 
+export function getAuthor(id)
+{
+ return database_operations.get_author.get(id)
+}
+
+
 export function modifyEntry(id,entry_change)
 {
 
@@ -70,5 +77,6 @@ export default  {
     getEntry,
     postEntry,
     modifyEntry,
-    deleteEntry
+    deleteEntry,
+    getAuthor
 }

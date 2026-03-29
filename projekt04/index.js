@@ -1,20 +1,40 @@
 import express from "express"
-import forum, { hasEntry } from './model/entries.js';
+import forum from "./controllers/forum.js";
 import cookieParser from "cookie-parser";
 import settings from "./model/settings.js";
+import entries from "./model/entries.js";
+import auth from "./controllers/auth.js";
+import sessions from "./model/sessions.js";
+
 
 const port = process.env.PORT || 8000;
+const ONE_DAY = 24 * 60 * 60 * 1000;
+const ONE_MONTH = 30 * ONE_DAY;
+const SECRET = process.env.SECRET;
+
+if (SECRET == null) {
+  console.error(
+    "SECRET environment variable missing. Please create an env file or provide SECRET via environment variables."
+  );
+  process.exit(1);
+}
 
 const app=express()
+
 app.set("view engine","ejs")
 
 app.use(express.static("public"))
 app.use(express.urlencoded())
-app.use(cookieParser());
+app.use(cookieParser(SECRET));
+app.use(settings.settingsHandler);
+app.use(sessions.sessionHandler);
+
 
 const settingsRouter = express.Router();
 
 settingsRouter.use("/toggle-theme",settings.themeToggle);
+settingsRouter.use("/accept-cookie",settings.acceptCookies);
+settingsRouter.use("/decline-cookie",settings.declineCookies);
 app.use("/settings",settingsRouter)
 
 function settingsLocals(req,res,next)
@@ -26,100 +46,36 @@ function settingsLocals(req,res,next)
 
 app.use(settingsLocals);
 
+const userRouter = express.Router()
+
+app.use("/user",userRouter)
+userRouter.get("/login",auth.login_get)
+userRouter.post("/login",auth.login_post)
+userRouter.get("/register",auth.register_get)
+userRouter.post("/register",auth.register_post)
+userRouter.get("/logout",auth.logout)
+
+
+
+
+
+
+const forumRouter = express.Router()
+forumRouter.get("/",(req,res)=>{res.redirect('/')})
+forumRouter.get("/:post",forum.getPost)
+forumRouter.post("/new_entry",auth.login_required,forum.newEntry)
+forumRouter.get("/:post/edit",forum.editEntryGet)
+forumRouter.post("/:post/edit",forum.editEntryPost)
+forumRouter.post("/:post/delete",forum.deleteEntry)
+
+app.use("/entries",forumRouter)
+
+
 
 app.get("/",(req,res)=>
 {
-    res.render("Index",{title:"Obiektywnie",entries:forum.getEntries()});
+    res.render("Index",{title:"Obiektywnie",entries:entries.getEntries()});
 })
-app.get("/entries/:post", (req, res) => {
-
-    if(forum.hasEntry(req.params.post))
-    {
-        const post = forum.getEntry(req.params.post);
-        res.render("Entry",{title:`Obiektywnie - ${post.title}`,entry:post, id: req.params.post})
-  } else {
-    res.sendStatus(404);
-  }
-});
-
-app.post("/new_entry", (req, res) => { 
-    let entry = {
-      title: req.body.title,
-      body: req.body.body,
-    };
-    var errors=forum.checkEntry(entry)
-    if(errors==="")
-    {
-        forum.postEntry(entry)
-        res.redirect(`/`);
-    }
-    else {
-      res.status(400);
-      res.render("Index", {
-        error: errors,
-        title: "Obiektywnie",
-        entries: forum.getEntries()
-      });
-    }
-  });
-app.get("/entries/:post/edit",(req,res)=>{
-   if(forum.hasEntry(req.params.post))
-    {
-        const post = forum.getEntry(req.params.post);
-        res.render("Entry_edit",{title:`Obiektywnie - ${post.title} - edytuj`,entry:post, id: req.params.post})
-  } else {
-    res.sendStatus(404);
-  }
-})
-app.post("/entries/:post/edit",(req,res)=>
-{
-  let entry_change =
-  {
-    title: req.body.title,
-    body: req.body.body,
-  };
-  var exist= hasEntry(req.params.post)
-  var errors= forum.checkEntry(entry_change)
-  if( exist && errors=="" )
-  {
-    forum.modifyEntry(req.params.post,entry_change);
-    res.redirect(`/entries/${req.params.post}`)
-  }
-  else
-  {
-      if(exist)
-      {
-       res.status(400);
-      const post = forum.getEntry(req.params.post);
-       res.render("Entry_edit",{title:`Obiektywnie - ${post.title} - edytuj`,entry:post, id: req.params.post,error: errors})
-      }
-      else
-      {
-        res.sendStatus(404);
-      }
-  }
-})
-
-app.post("/entries/:post/delete",(req,res)=>
-{
-  if(forum.hasEntry(req.params.post))
-  {
-    forum.deleteEntry(req.params.post);
-    res.redirect('/')
-  }
-  else
-  {
-    res.status(400);
-      res.render("Index", {
-        error: "nie udało się usunąć postu ( on nie istnieje :( )",
-        title: "Obiektywnie",
-        entries: forum.getEntries()
-      });
-  }
-})
-
-
-app.get('/entries/',(req,res)=>{res.redirect('/')})
 
 app.listen(port,()=>
 {

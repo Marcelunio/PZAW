@@ -1,0 +1,155 @@
+/* Cookie Banner Container */
+
+html
+{
+    --header-color: beige;
+    --background: aliceblue;
+    --main-color: rgb(220, 220, 220);
+    --tile-color:cadetblue;
+    --footer-color:rgb(204, 179, 190);
+    --text-color-normal: #000;
+    --icon-color: transparent;
+    background-color: var(--background);
+    color: var(--text-color-normal);
+}
+html[data-theme='dark'] {
+    --header-color: rgb(14, 8, 51);
+    --background: rgb(26, 21, 2);
+    --main-color: rgb(36, 36, 36);
+    --tile-color:rgb(194, 171, 72);
+    --footer-color:rgb(9, 56, 5);
+    --text-color-normal: #e9e9e9;
+    --icon-color: white;
+    background-color: var(--background);
+    color: var(--text-color-normal);
+}
+
+.cookie-container {
+  /* Positioning the banner fixed at the bottom-left corner */
+  position: fixed;
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  left: 20px; /* Distance from the left side of the viewport */
+  
+    .custom-break {
+  display: block;
+  height: 10px; /* Adjust the height to control the space between paragraphs */
+  margin: 15px 0; /* Adds margin space above and below the break */
+}
+  
+  /* Adjusting the overall dimensions and padding of the container */
+  width: 400px; /* Width of the banner */
+  padding: 25px; /* Space inside the banner for text/content */
+  
+  /* Styling the background, border, and text */
+  background-color: var(--background); /* White background */
+  border: 1px solid var(--text-color-normal); /* Thin border in a specific brown color */
+  font-family: "Roboto Mono", "Courier New", monospace; /* Priority fonts */
+  font-size: 13px; /* Base font size for the banner text */
+  letter-spacing: 0.325px; /* Spacing between letters for readability */
+  
+  /* Ensures all text in the container is transformed to uppercase */
+  text-transform: uppercase; 
+  
+  /* Ensures the banner's internal elements fit within its bounds */
+  box-sizing: border-box;
+}
+
+/* Link Styling for Privacy and Cookie Policy Links */
+.cookieLink {
+  /* Initial color for the links */
+  color: #6F4E37; /* Warm brown color for links */
+  text-decoration: underline; /* Underline to distinguish as clickable */
+  font-weight: 500; /* Slightly bold (Demi-bold) to make it stand out */
+}
+
+/* Hover effect for links */
+.cookieLink:hover {
+  color: #5A3A29; /* Darker brown for links on hover */
+}
+
+/* Container for the Accept/Decline buttons */
+#buttonContainer {
+  /* Flexbox layout to align buttons horizontally */
+  display: flex;
+  justify-content: space-between; /* Adds equal spacing between buttons */
+  
+  /* Space between buttons */
+  gap: 15px; /* Space between the buttons */
+
+  
+  /* Adjusts space between buttons and the banner text */
+  margin-top: 15px; /* Adds space between buttons and the text */
+}
+
+/* Styling for the Accept/Decline buttons */
+.cookieButton {
+  background-color: var(--tile-color); /* Light gray background color for buttons */
+  border: 1px solid var(--text-color-normal); /* Thin brown border around the buttons */
+  padding: 10px 20px; /* Padding inside the buttons to make them bigger */
+  
+  /* Font settings for the button text */
+  font-family: "Roboto Mono", "Courier New", monospace; /* Priority fonts */
+  font-size: 12px; /* Font size for the buttons */
+  text-transform: uppercase; /* Ensures button text is uppercase */
+  letter-spacing: 0.325px; /* Letter spacing for readability */
+  
+  cursor: pointer; /* Changes the mouse pointer to a hand on hover */
+  width: 125px; /* Sets a consistent width for both buttons */
+}
+
+/* Hover effect for buttons */
+.cookieButton:hover {
+  background-color: #D6B5A4; /* Light brown color for button on hover */
+}
+
+/* Responsive Design for Mobile (max width 600px) */
+@media (max-width: 600px) {
+  .cookie-container {
+    /* Make the banner nearly full-width on small screens */
+    width: 90%;
+    bottom: 10px; /* Adjusts position from the bottom on small screens */
+    left: 5%; /* Center the banner horizontally */
+    padding: 15px; /* Reduced padding for smaller screens */
+    font-size: 11px; /* Smaller font size for mobile screens */
+  }
+
+  /* Adjust button padding for smaller screens */
+  .cookieButton {
+    padding: 8px 15px;
+  }
+
+  /* Make the buttons stack vertically on mobile screens */
+  #acceptButton, #declineButton {
+    width: 100%; /* Full-width buttons on small screens */
+  }
+
+  /* Stack buttons vertically */
+  #buttonContainer {
+    flex-direction: column; /* Buttons will be displayed one below the other */
+    gap: 10px; /* Reduced gap between vertically stacked buttons */
+  }
+}
+
+/* Responsive Design for Tablet (between 601px and 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .cookie-container {
+    width: 70%; /* Adjusted width for tablet screens */
+    bottom: 15px; /* Adjusted position from the bottom */
+    left: 15%; /* Center the banner horizontally */
+    padding: 12px; /* Adjusted padding for tablets */
+    font-size: 12px; /* Slightly larger font size than mobile */
+  }
+
+  .cookieButton {
+    padding: 9px 18px; /* Adjusted button padding for tablets */
+  }
+
+  #acceptButton, #declineButton {
+    width: 45%; /* Slightly smaller button width for tablet screens */
+  }
+
+  /* Adjust gap between buttons for tablets */
+  #buttonContainer {
+    gap: 12px;
+  }
+}

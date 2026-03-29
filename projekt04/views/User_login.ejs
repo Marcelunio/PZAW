@@ -1,0 +1,30 @@
+<%- include("./templates/partial_header.ejs") %>
+<main>
+    <form action="/user/login" method="POST">
+        <div>
+            <label for="username">Nazwa użytkownika</label>
+            <input
+            type="text"
+            name="username"
+            required
+            minlength="3"
+            maxlength="20"
+            />
+        </div>
+        <div>
+            <label for="password">hasło:</label>
+            <input
+            type="password"
+            name="password"
+            required
+            minlength="3"
+            maxlength="20"
+            />
+        </div>
+        <% if(typeof error!=='undefined'){ %><%= error %><% } %>
+        <div>
+            <button type="submit">Zaloguj</button>
+        </div>
+    </form>
+</main>
+<%- include("./templates/partial_footer.ejs") %>

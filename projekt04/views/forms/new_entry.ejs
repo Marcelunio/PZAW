@@ -1,4 +1,5 @@
-<form action="/new_entry" method="POST">
+<% if(user!==null){ %>
+<form action="/entries/new_entry" method="POST">
   <div>
     <label for="title">Tytuł</label>
     <input
@@ -20,3 +21,7 @@
     <button>Dodaj</button>
   </div>
 </form>
+<% } else { %>
+  <p><b>Dodawanie nowych postów dostępne tylko dla zalogowanych użytkowników</b></p>
+  <% if(typeof error!=='undefined'){ %><%= error %><% } %>
+  <% } %>
