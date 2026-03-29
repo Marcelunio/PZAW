@@ -15,9 +15,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "node --watch --env-file .env ./index.js",
+    "populate_db": "node utils/populate_db.js",
+    "generate_env": "./utils/generate_env.sh > .env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "argon2": "^0.44.0",
     "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0"
