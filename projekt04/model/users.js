@@ -55,6 +55,7 @@ export async function createUser(username, password) {
 }
 
 export async function createAdmin(username, password,id) {
+  
   let existing_user = db_ops.find_by_username.get(username);
 
   if (existing_user != null) {
@@ -62,8 +63,9 @@ export async function createAdmin(username, password,id) {
   }
   let createdAt = Date.now();
   let passhash = await argon2.hash(password, HASH_PARAMS);
+  console.info(username, password,id)
 
-  return db_ops.create_user.get(username, passhash, createdAt,id);
+  return db_ops.create_admin.get(username, passhash, createdAt,id);
 }
 
 
@@ -92,4 +94,5 @@ export default {
   createUser,
   validatePassword,
   getUser,
+  createAdmin
 };

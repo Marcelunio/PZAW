@@ -64,7 +64,7 @@ export async function login_post(req, res) {
     }
   }
     res.status(400);
-    res.render("User_registration", {
+    res.render("User_login", {
       error: errors,
       title: "Rejestracja",
     });

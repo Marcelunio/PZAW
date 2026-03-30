@@ -54,15 +54,4 @@ database.exec(
 )
 
 
-export async function createAdmin(username, password,id) {
-  let existing_user = db_ops.find_by_username.get(username);
-
-  if (existing_user != null) {
-    return null;
-  }
-  let createdAt = Date.now();
-  let passhash = await argon2.hash(password, HASH_PARAMS);
-
-  return db_ops.create_user.get(username, passhash, createdAt,id);
-}
 database.close()

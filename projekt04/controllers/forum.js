@@ -63,7 +63,7 @@ function editEntryPost(req,res)
     res.render("Entry_edit",{title:`Obiektywnie - ${post.title} - edytuj`,entry:post, id: req.params.post,error: errors})
     return
   }
-  if((res.locals.user.id != post.author_id) || (res.locals.user.id <0))
+  if((res.locals.user.id != post.author_id) && (res.locals.user.id >=0))
   {
      errors="You can't change others posts" 
     res.status(400);
@@ -91,21 +91,22 @@ function editEntryPost(req,res)
 
 function deleteEntry(req,res)
 {
+  let errors=""
   const post = forum.getEntry(req.params.post);
   if(forum.hasEntry(req.params.post))
   {
     if(res.locals.user==null)
   { 
-    errors="You have to be logged in" 
+    errors+="You have to be logged in to delete a post" 
     res.status(400);
-    res.render("Index",{title:`Obiektywnie - ${post.title} - edytuj`,entry:post, id: req.params.post,error: errors})
+    res.render("Index",{title:`Obiektywnie - ${post.title} - edytuj`,entries: forum.getEntries(), id: req.params.post,error: errors})
     return
   }
-  if((res.locals.user.id != post.author_id) || (res.locals.user.id <0))
+  if((res.locals.user.id != post.author_id) && (res.locals.user.id >=0))
   {
-     errors="You can't change others posts" 
+     errors+="You can't change others posts" 
     res.status(400);
-    res.render("Index",{title:`Obiektywnie - ${post.title} - edytuj`,entry:post, id: req.params.post,error: errors})
+    res.render("Index",{title:`Obiektywnie - ${post.title} - edytuj`,entries: forum.getEntries(), id: req.params.post,error: errors})
     return
   }
     forum.deleteEntry(req.params.post);

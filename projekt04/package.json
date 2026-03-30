@@ -15,9 +15,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "initialize": "node --run populate_db\n node --run generate_env\n node --run admin ",
     "dev": "node --watch --env-file .env ./index.js",
     "populate_db": "node utils/PopulateDatabase.js",
-    "generate_env": "./utils/generate_env.sh > .env",
+    "admin": "node --env-file .env utils/makeAdmin.js",
+    "generate_env": "chmod a+x utils/generate_env.sh\n ./utils/generate_env.sh > .env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
