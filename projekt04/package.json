@@ -17,6 +17,7 @@
   "scripts": {
     "initialize": "node --run populate_db\n node --run generate_env\n node --run admin ",
     "dev": "node --watch --env-file .env ./index.js",
+    "start": "node --env-file .env ./index.js",
     "populate_db": "node utils/PopulateDatabase.js",
     "admin": "node --env-file .env utils/makeAdmin.js",
     "generate_env": "chmod a+x utils/generate_env.sh\n ./utils/generate_env.sh > .env",
