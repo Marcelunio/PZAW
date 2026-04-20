@@ -1,0 +1,27 @@
+<% if(user!==null){ %>
+<form action="/entries/new_entry" method="POST">
+  <div>
+    <label for="title">Tytuł</label>
+    <input
+      type="text"
+      name="title"
+      required
+      minlength="1"
+      maxlength="50"
+    />
+  </div>
+  <div>
+    <label for="body">Ciało</label>
+    <textarea
+      name="body"
+      required ></textarea>
+  </div>
+  <% if(typeof error!=='undefined'){ %><%= error %><% } %>
+  <div>
+    <button>Dodaj</button>
+  </div>
+</form>
+<% } else { %>
+  <p><b>Dodawanie nowych postów dostępne tylko dla zalogowanych użytkowników</b></p>
+  <% if(typeof error!=='undefined'){ %><%= error %><% } %>
+  <% } %>

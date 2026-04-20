@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  data-theme="<%- app.theme %>" lang="pl">
+<head>
+    <meta charset ="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg">
+    <link rel="stylesheet" href="/cookie_baner.css">
+    <title><%= title %></title>
+    <script src="/theme.js"></script>
+</head>
+<body>
+<header>
+    <a href="/">
+    <h1>Obiektywnie</h1>
+    </a>
+</header>
+<section id="settings">
+  <a href="/settings/toggle-theme?next=<%- encodeURIComponent(page) %>" id="theme_toggle">
+        <% if (app.theme === "dark") { %>
+        <strong>Ciemny</strong> | Jasny
+        <% } else { %>
+        Ciemny | <strong>Jasny</strong>
+        <% } %>
+      </a>
+     <% if (user==null) { %>
+        <a href="/user/register">
+            <strong>register</strong>
+        </a>
+        <a href="/user/login">
+            <strong>Log-in</strong>
+        </a>
+        <% }else{ %>
+        <p>Witaj <%=user.username%></p>
+        <a href="/user/logout">
+            <strong>wyloguj</strong>
+        </a>
+        <% } %>
+</section>

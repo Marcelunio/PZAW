@@ -1,0 +1,33 @@
+<%- include("./templates/partial_header.ejs") %>
+<main>
+    <h1>Editing: <%= entry.title %></h1>
+    <hr>
+    <form action="./edit" method="POST">
+  <section>
+    <label for="title">Tytuł</label>
+    <input
+      type="text"
+      name="title"
+      required
+      minlength="1"
+      maxlength="50"
+      value="<%= entry.title %>"
+    />
+  </section>
+  <section>
+    <label for="body">Ciało</label>
+    <textarea
+      name="body"
+      required ><%= entry.body %></textarea>
+  </section>
+  <% if(typeof error!=='undefined'){ %><%= error %><% } %>
+  <section>
+    <button>Zmien</button>
+  </section>
+</form>
+</main>
+
+
+
+
+<%- include("./templates/partial_footer.ejs") %>

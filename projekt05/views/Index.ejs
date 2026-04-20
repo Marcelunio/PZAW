@@ -1,0 +1,23 @@
+<%- include("./templates/partial_header.ejs") %>
+<main>
+    <h2>Obiektywne rozmowy o obiektywach (i innym osprzęcie fotograficznym). </h2>
+    <section>
+    <% entries.forEach(function(entry){ %>
+        <article>
+  <a href="entries/<%= entry.id %>">
+    <h3>
+        <%= entry.title %>
+    </h3>
+    <hr>
+    <div>
+        <%= entry.body %>
+    </div>
+  </a>  
+</article>
+<% })%>
+    </section>
+<hr>
+<%- include("./forms/new_entry.ejs"); %>
+
+</main>
+<%- include("./templates/partial_footer.ejs") %>

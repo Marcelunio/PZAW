@@ -1,0 +1,19 @@
+<%- include("./templates/partial_header.ejs") %>
+<main>
+    <% if(user!=null && (user.id==entry.author_id ||  user.id<0)) {%>
+    <form method="post" action="./<%= id %>/delete" class="icon"> 
+        <input class="icon" id="delete" type="submit" value="" />
+    </form>
+    <a href="./<%= id %>/edit" class="icon">
+            <img class="icon" src="/icons/edit.svg"  />
+    </a>
+    <% } %>
+    <h1><%= entry.title %></h1>
+    <hr>
+    <p><%= entry.body %></p>
+</main>
+
+
+
+
+<%- include("./templates/partial_footer.ejs") %>
