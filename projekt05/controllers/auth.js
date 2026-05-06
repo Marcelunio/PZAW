@@ -104,7 +104,9 @@ function validateRegistrationForm(values) {
            {errors+="pola muszą być stringiem "} ;
         if (  (values.username.length < 3 || values.username.length > 50 ))
             {errors+="username nie poprawnej długości nie poprawnej wielkości"}
-        if(values.password != values.check)
+        if ((values.password.length <8))
+            {errors+="hasło nie poprawnej długości: przynajmniej 8 znaków"}
+        else if(values.password != values.check)
         {
           errors+="hasła się niezgadzają"
         }
@@ -121,6 +123,8 @@ function validateLoginForm(values) {
         else {
             if (  (values.username.length < 3 || values.username.length > 50 ))
                 errors+="username nie poprawnej długości nie poprawnej wielkości"
+            if ((values.password.length <8))
+              {errors+="hasło nie poprawnej długości: przynajmniej 8 znaków"}
       }
 }
   return errors;
