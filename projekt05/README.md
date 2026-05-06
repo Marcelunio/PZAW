@@ -33,7 +33,7 @@ node --run start
 Można dodać wpis na stronie głównej, przy zalogowaniu. W danym wpisie po prawej stronie są ikony usunięcia i edycji  
 Login i hasło do admina to:  
 login: admin  
-hasło: admin  
+hasło: admin123  
 Powinny one się pokazać przy inicjalizacji aplikacji
 
 #### Atrybucje:  
