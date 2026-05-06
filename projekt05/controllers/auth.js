@@ -121,7 +121,7 @@ function validateLoginForm(values) {
         if (typeof(values.username) != "string"||typeof(values.password) != "string")
            errors+="pola muszą być stringiem ";
         else {
-            if (  (values.username.length < 3 || values.username.length > 50 ))
+            if ((values.username.length < 3 || values.username.length > 50 ))
                 errors+="username nie poprawnej długości nie poprawnej wielkości"
             if ((values.password.length <8))
               {errors+="hasło nie poprawnej długości: przynajmniej 8 znaków"}
