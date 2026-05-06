@@ -1,10 +1,10 @@
 # Obiektywnie
 
-Forum internetowe o Aparatach i urządzeniach  
+Forum internetowe o Aparatach i sprzę
 
 ## Instalacja  
 
-Po zpullowaniu kodu źródłowego użyc następujących komend:  
+Po sklonowaniu repozytorium użyć następujących komend:  
 
 ```bash
 npm install  
@@ -12,19 +12,19 @@ node --run initialize
 ```
 
 ## Uruchamianie servera  
-Aby uruchomic server wystarczy użyc komendy  
+Aby uruchomic server wystarczy użyć komendy  
 
 ```bash
 node --run start  
 ```
 
 ### Stos technologii:  
-    1.Javascript  
-    2.Node.js  
-        * Express  
-        * Ejs 
-        * Argon2  
-        * cookie-parser  
+1. Javascript  
+2. Node.js  
+    * Express  
+    * Ejs 
+    * Argon2  
+    * cookie-parser  
 
 ### Informacje operacyjne 
 
@@ -32,7 +32,7 @@ Można dodać wpis na stronie głównej, przy zalogowaniu. W danym wpisie po pra
 Login i hasło do admina to:  
 login: admin  
 hasło: admin  
-Powinny one się pokazac przy inicjalizacji aplikacji
+Powinny one się pokazać przy inicjalizacji aplikacji
 
 #### Atrybucje:  
 Cookie banner silnie inspirowany:
