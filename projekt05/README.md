@@ -1,6 +1,6 @@
 # Obiektywnie
 
-Forum internetowe o Aparatach i sprzę
+Forum internetowe o aparatach i sprzęcie fotograficznym
 
 ## Instalacja  
 
@@ -35,5 +35,5 @@ hasło: admin
 Powinny one się pokazać przy inicjalizacji aplikacji
 
 #### Atrybucje:  
-Cookie banner silnie inspirowany:
+Cookie banner silnie inspirowany:  
     https://gist.github.com/danielleallennn/9713ad2d95826efc60e039803eae7be6
