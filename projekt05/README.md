@@ -4,7 +4,7 @@
 
 Forum internetowe o aparatach i sprzęcie fotograficznym
 
-## Instalacja  
+## Instalacja:  
 
 Po sklonowaniu repozytorium użyć następujących komend w folderze z tym readme (projekt05):  
 
@@ -13,7 +13,7 @@ npm install
 node --run initialize  
 ```
 
-## Uruchamianie servera  
+## Uruchamianie serwera  
 Aby uruchomic server wystarczy użyć komendy  
 
 ```bash
@@ -28,7 +28,7 @@ node --run start
     * Argon2  
     * cookie-parser  
 
-### Informacje operacyjne 
+### Informacje operacyjne:
 
 Można dodać wpis na stronie głównej, przy zalogowaniu. W danym wpisie po prawej stronie są ikony usunięcia i edycji  
 Login i hasło do admina to:  
