@@ -1,14 +1,14 @@
 {
-  "name": "pzaw_second_project",
+  "name": "objektywnie",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/Marcelunio/Pzaw_Second_project#readme",
+  "homepage": "https://github.com/Marcelunio/PZAW/tree/main/projekt05#readme",
   "bugs": {
-    "url": "https://github.com/Marcelunio/Pzaw_Second_project/issues"
+    "url": "https://github.com/Marcelunio/PZAW/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Marcelunio/Pzaw_Second_project.git"
+    "url": "githttps://github.com/Marcelunio/PZAW.git"
   },
   "license": "ISC",
   "author": "",

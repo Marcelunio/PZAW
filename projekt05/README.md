@@ -6,7 +6,7 @@ Forum internetowe o aparatach i sprzęcie fotograficznym
 
 ## Instalacja  
 
-Po sklonowaniu repozytorium użyć następujących komend:  
+Po sklonowaniu repozytorium użyć następujących komend w folderze z tym readme (projekt05):  
 
 ```bash
 npm install  
