@@ -1,41 +1,88 @@
 # Obiektywnie
 
-### Obiektywne rozmowy o obiektywach  
+### Obiektywne rozmowy o obiektywach
 
-Forum internetowe o aparatach i sprzęcie fotograficznym
+Forum internetowe o aparatach i sprzęcie fotograficznym.
 
-## Instalacja:  
+## Funkcje
+- Rejestracja i logowanie użytkowników
+- Dodawanie nowych wpisów (postów)
+- Edycja i usuwanie własnych wpisów
+- Administratora z wstępnie skonfigurowanym kontem
+- Obsługa ciasteczek i baner zgody na cookies
+- Przełączanie motywu aplikacji
 
-Po sklonowaniu repozytorium użyć następujących komend w folderze z tym readme (projekt05):  
+## Wymagania
+- Node.js 18+ (lub nowszy)
+- npm
+
+## Instalacja
+1. Skopiuj repozytorium do katalogu projektu.
+2. Zainstaluj zależności:
 
 ```bash
-npm install  
-node --run initialize  
+npm install
 ```
 
-## Uruchamianie serwera  
-Aby uruchomic server wystarczy użyć komendy  
+3. Zainicjuj aplikację:
 
 ```bash
-node --run start  
+npm run initialize
 ```
 
-### Stos technologii:  
-1. Javascript  
-2. Node.js  
-    * Express  
-    * Ejs 
-    * Argon2  
-    * cookie-parser  
+> `initialize` wykonuje: wypełnienie bazy danych, wygenerowanie pliku `.env` oraz utworzenie konta administratora.
 
-### Informacje operacyjne:
+## Uruchamianie
+Po instalacji uruchom serwer:
 
-Można dodać wpis na stronie głównej, przy zalogowaniu. W danym wpisie po prawej stronie są ikony usunięcia i edycji  
-Login i hasło do admina to:  
-login: admin  
-hasło: admin123  
-Powinny one się pokazać przy inicjalizacji aplikacji
 
-#### Atrybucje:  
-Cookie banner silnie inspirowany:  
-    https://gist.github.com/danielleallennn/9713ad2d95826efc60e039803eae7be6
+```bash
+npm start
+```
+
+Aplikacja domyślnie nasłuchuje na porcie `8000`, chyba że ustawisz zmienną środowiskową `PORT`.
+
+## Konfiguracja środowiska
+Aplikacja wymaga pliku `.env` z wygenerowanymi ustawieniami. Jeśli użyjesz `node --run initialize`, plik `.env` zostanie utworzony automatycznie.
+o strukturze
+```
+PORT=8000
+SECRET=<Sekret używany przez cookie-parser>
+PEPPER=<pieprz wykorzystywany przez Argon2 do haseł>
+```
+
+## Struktura projektu
+
+Projekt starał się wykorzystywac architekturę projektu MVC (Model-View-Controller)
+- `index.js` - punkt wejścia serwera Express
+- `controllers/` - logika tras i obsługi żądań
+- `model/` - dane, sesje i ustawienia aplikacji
+- `public/` - pliki statyczne (CSS, JavaScript, ikony)
+- `views/` - szablony EJS
+- `utils/` - skrypty pomocnicze do generowania środowiska i bazy danych
+
+## Skrypty npm
+- `npm run initialize` - przygotowuje bazę danych, tworzy `.env` i konto administratora
+- `npm run populate_db` - wypełnia bazę przykładowymi danymi
+- `npm run admin` - tworzy konto administratora
+- `npm run dev` - uruchamia serwer w trybie watch z plikiem `.env`
+- `npm start` - uruchamia serwer z plikiem `.env`
+
+## Technologie
+- JavaScript
+- Node.js
+- Express
+- EJS
+- Argon2
+- cookie-parser
+- Morgan
+
+## Administrator
+Domyślne konto administratora tworzone przy inicjalizacji:
+- login: `admin`
+- hasło: `admin123`
+
+## Atrybucje
+Cookie banner silnie inspirowany:
+https://gist.github.com/danielleallennn/9713ad2d95826efc60e039803eae7be6
+
