@@ -1,11 +1,11 @@
-import express from "express"
+import express from "express";
+import morgan from "morgan";
 import forum from "./controllers/forum.js";
 import cookieParser from "cookie-parser";
 import settings from "./model/settings.js";
 import entries from "./model/entries.js";
 import auth from "./controllers/auth.js";
 import sessions from "./model/sessions.js";
-
 
 const port = process.env.PORT || 8000;
 const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -20,14 +20,21 @@ if (SECRET == null) {
 }
 
 const app=express()
-
 app.set("view engine","ejs")
-
 app.use(express.static("public"))
 app.use(express.urlencoded())
 app.use(cookieParser(SECRET));
 app.use(settings.settingsHandler);
 app.use(sessions.sessionHandler);
+app.use(morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    "\nsession info:",
+    tokens.session(req,res),
+  ].join(' ')
+}))
 
 
 const settingsRouter = express.Router();
@@ -49,10 +56,10 @@ app.use(settingsLocals);
 const userRouter = express.Router()
 
 app.use("/user",userRouter)
-userRouter.get("/login",auth.login_get)
-userRouter.post("/login",auth.login_post)
-userRouter.get("/register",auth.register_get)
-userRouter.post("/register",auth.register_post)
+userRouter.get("/login",auth.loginGet)
+userRouter.post("/login",auth.loginPost)
+userRouter.get("/register",auth.registerGet)
+userRouter.post("/register",auth.registerPost)
 userRouter.get("/logout",auth.logout)
 
 
@@ -63,7 +70,7 @@ userRouter.get("/logout",auth.logout)
 const forumRouter = express.Router()
 forumRouter.get("/",(req,res)=>{res.redirect('/')})
 forumRouter.get("/:post",forum.getPost)
-forumRouter.post("/new_entry",auth.login_required,forum.newEntry)
+forumRouter.post("/new_entry",auth.loginRequired,forum.newEntry)
 forumRouter.get("/:post/edit",forum.editEntryGet)
 forumRouter.post("/:post/edit",forum.editEntryPost)
 forumRouter.post("/:post/delete",forum.deleteEntry)

@@ -3,11 +3,11 @@ import { createUser, validatePassword } from "./../model/users.js";
 
 const ADMIN_USERNAME= "admin"
 const ADMIN_PASSWORD = "admin"
-export function register_get(req, res) {
+export function registerGet(req, res) {
   res.render("User_register", { title: "Rejestracja",  });
 }
 
-export async function register_post(req, res) {
+export async function registerPost(req, res) {
   
   let registration=
   {
@@ -36,11 +36,11 @@ export async function register_post(req, res) {
     });
 }
 
-export function login_get(req, res) {
+export function loginGet(req, res) {
   res.render("User_login", { title: "Logowanie"});
 }
 
-export async function login_post(req, res) {
+export async function loginPost(req, res) {
   
   let login=
   {
@@ -77,7 +77,7 @@ function logout(req, res) {
   res.redirect("/");
 }
 
-function login_required(req, res, next) {
+function loginRequired(req, res, next) {
   if (res.locals.user == null) {
     res.redirect("/")
     return;
@@ -86,12 +86,12 @@ function login_required(req, res, next) {
 }
 
 export default {
-  login_get,
-  login_post,
-  register_get,
-  register_post,
+  loginGet,
+  loginPost,
+  registerGet,
+  registerPost,
   logout,
-  login_required,
+  loginRequired,
 };
 
 

@@ -1,7 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 import { randomBytes } from "node:crypto";
 import { getUser } from "./users.js";
-
+import morgan from "morgan";
 const db_path = "./db.sqlite";
 const db = new DatabaseSync(db_path, { readBigInts: true });
 
@@ -27,12 +27,12 @@ const db_ops = {
 };
 
 export function createSession(user_id, res) {
-  let sessionId = randomBytes(8).readBigInt64BE();
-  let createdAt = Date.now();
+  let session_id = randomBytes(8).readBigInt64BE();
+  let created_at = Date.now();
 
-  let session = db_ops.create_session.get(sessionId, user_id, createdAt);
+  let session = db_ops.create_session.get(session_id, user_id, created_at);
   res.locals.session = session;
-  res.locals.user = session.user_id != null ? getUser(session.user_id) : null;
+  res.locals.user = session.user_id != null ? get_user(session.user_id) : null;
 
   res.cookie(SESSION_COOKIE, session.id.toString(), {
     maxAge: ONE_WEEK,
@@ -43,23 +43,23 @@ export function createSession(user_id, res) {
 }
 
 function sessionHandler(req, res, next) {
-  let sessionId = req.cookies[SESSION_COOKIE];
+  let session_id = req.cookies[SESSION_COOKIE];
   let session = null;
-  if (sessionId != null) {
-    if (!sessionId.match(/^-?[0-9]+$/)) {
+  if (session_id != null) {
+    if (!session_id.match(/^-?[0-9]+$/)) {
       // Invalid session id
-      sessionId = null;
+      session_id = null;
     } else {
-      sessionId = BigInt(sessionId);
+      session_id = BigInt(session_id);
     }
   }
 
-  // sessionId may look valid but might not exist in db
-  if (sessionId != null) session = db_ops.get_session.get(sessionId);
+  // session_id may look valid but might not exist in db
+  if (session_id != null) session = db_ops.get_session.get(session_id);
 
   if (session != null) {
     res.locals.session = session;
-    res.locals.user = session.user_id != null ? getUser(session.user_id) : null;
+    res.locals.user = session.user_id != null ? get_user(session.user_id) : null;
 
     res.cookie(SESSION_COOKIE, res.locals.session.id.toString(), {
       maxAge: ONE_WEEK,
@@ -70,32 +70,24 @@ function sessionHandler(req, res, next) {
     session = createSession(null, res);
   }
 
-  setImmediate(printUserSession);
-
   next();
 
-  function printUserSession() {
-    console.info(
-      "Session:",
-      session.id,
-      "user:",
-      session.user_id,
-      "created at:",
-      new Date(Number(session.created_at)).toISOString(),
-    );
-  }
 }
 
 export function deleteSession(res) {
-  let sessionId = res.locals.session.id;
-  db_ops.delete_session.run(sessionId);
+  let session_id = res.locals.session.id;
+  db_ops.delete_session.run(session_id);
 
-  res.cookie(SESSION_COOKIE, sessionId.toString(), {
+  res.cookie(SESSION_COOKIE, session_id.toString(), {
     maxAge: 0,
     httpOnly: true,
     secure: true,
   });
 }
+
+ morgan.token("session", function (req, res) {;
+  return ["session_id: ",res.locals.session.id,"user_id: ",res.locals.session.user_id,"date: ", new Date(Number(res.locals.session.created_at)).toISOString()].join(" ");
+});
 
 export default {
   createSession,
