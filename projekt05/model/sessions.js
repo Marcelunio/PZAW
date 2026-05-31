@@ -32,7 +32,7 @@ export function createSession(user_id, res) {
 
   let session = db_ops.create_session.get(session_id, user_id, created_at);
   res.locals.session = session;
-  res.locals.user = session.user_id != null ? get_user(session.user_id) : null;
+  res.locals.user = session.user_id != null ? getUser(session.user_id) : null;
 
   res.cookie(SESSION_COOKIE, session.id.toString(), {
     maxAge: ONE_WEEK,
@@ -59,7 +59,7 @@ function sessionHandler(req, res, next) {
 
   if (session != null) {
     res.locals.session = session;
-    res.locals.user = session.user_id != null ? get_user(session.user_id) : null;
+    res.locals.user = session.user_id != null ? getUser(session.user_id) : null;
 
     res.cookie(SESSION_COOKIE, res.locals.session.id.toString(), {
       maxAge: ONE_WEEK,
