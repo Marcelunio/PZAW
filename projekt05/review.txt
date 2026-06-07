@@ -1,0 +1,52 @@
+
+Review od Nauczyciela:
+- README:
+- README zawiera minimum niezbędnych informacji, ale jako że jest to wizytówka projektu, możesz chcieć to bardziej doszlifować.
+- Dodaj chociaż opis projektu - zdanie albo dwa
+- Przeczytaj trochę na temat składni Markdown i podziel dokument na sekcje
+- Komendy do uruchamiania w terminalu najlepiej umieszczać w blokach kodu:
+- UX:
+- Wizualnie nie jest pięknie, ale jest funkcjonalnie
+- Wyrównaj chociaż pola w formularzach logowania/rejestracji
+- Funkcjonalność:
+- Brak weryfikacji długości hasła po stronie serwera
+- Wprowadzanie ograniczenia maksymalnej długości hasła do 20 znaków to bardzo zły pomysł
+- Kod:
+- Formatowanie w Twoim kodzie jest bardzo często losowe. Wybierz jeden styl i staraj się go trzymać a jeszcze lepiej zainstaluj sobie auto-formater, np. Prettier, ustaw edytor tak żeby formatował dokument podczas zapisu i nie myśl o tym więcej.
+
+Review od nr. 16
+
+- Ogólnie strona wygląda dość słabo jeśli chodzi o css, nie podoba mi się wgl tryb ciemny
+- W niektórych miejscach używasz var a w niektórych let mógłbyś to ustandaryzować
+- Podoba mi się rozbudowanie struktury plików, łatwo się w tym odnaleźć
+- Logowanie ani rejestracja nie działają
+
+ReferenceError: get_user is not defined
+    at createSession (file:///C:/Users/Adam/PZAW3C/projekt05/model/sessions.js:35:37)
+    at registerPost (file:///C:/Users/Adam/PZAW3C/projekt05/controllers/auth.js:25:7)
+
+ReferenceError: get_user is not defined
+    at createSession (file:///C:/Users/Adam/PZAW3C/projekt05/model/sessions.js:35:37)
+    at loginPost (file:///C:/Users/Adam/PZAW3C/projekt05/controllers/auth.js:61:7)
+
+reference error:  chyba po prostu trzeba było zmienić get_user na getUser w linijce 62 i 35 po tej zmianie już działa
+
+-podoba mi się możliwość przeglądania pomimo nie bycia zalogowanym
+
+Review od nr. 11
+
+review:
+moje propozycje:
+1. mało intuicyjne UI, proponuje wieksze bloki tematyczne i zamiast headera to osobne przyciski do logowania, rejestrowania, zmiany motywu żeby pozbyć się paska
+2. Witaj <uzytkownik> powinno być w jednej lini 
+3. odrazu po zalogowaniu na głównej stronie mogę dodać post, gdzie moim zdaniem wygląda to nie profesjonalnie i powinno być rodzielone przyciskiem <dodaj post> i potem dopiero ui dodawania
+4. proponuje ograniczenie ilosci postow wrzucanych przez jedna osobę
+5. posty mogą mieć ten sam tytuł
+6. przyciski do usuwania i edytowanie posta w trybie ciemnym dalej są białe
+
+
+chwalenie:
+1. fajnie zrobiony system jasnego i ciemnego motywu
+2. podoba mi się system identyfikacji postów jest prosty a dobrze spełnia swoje zadanie
+3. doceniam możliwość npm run initialize
+4. kod czytelny, ładnie napisany

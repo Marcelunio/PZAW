@@ -15,12 +15,13 @@ html
     --text-color-normal: #000;
     --text-color-inverted: #e9e9e9;
     --icon-color: transparent;
-    background-color: var(--background);
+    --delete-icon: url(icons/delete.svg);
+    --edit-icon: url(icons/edit.svg);
     color: var(--text-color-normal);
 }
 html[data-theme='dark'] {
     --header-color: rgb(14, 8, 51);
-    --background: rgb(26, 21, 2);
+    --background: rgb(50, 57, 63);
     --main-color: rgb(36, 36, 36);
     --tile-color:rgb(129, 108, 13);
     --tile-color-inverted:cadetblue;
@@ -28,7 +29,8 @@ html[data-theme='dark'] {
     --text-color-normal: #e9e9e9;
     --text-color-inverted: #000;
     --icon-color: white;
-    background-color: var(--background);
+    --delete-icon: url(icons/delete_dark.svg);
+    --edit-icon: url(icons/edit_dark.svg);
     color: var(--text-color-normal);
 }
 body
@@ -76,9 +78,8 @@ article
     {
         text-align: center;
     }
-    div
+    div 
     {
-        
         white-space: nowrap;
         height: inherit;
         overflow:hidden;      
@@ -109,14 +110,6 @@ hr
 {margin-top: 10px; 
 margin-bottom: 10px;
 }
-textarea
-{
-    border-radius: 5px;
-    text-align: start;
-    width: 368px;
-    height: 217px;
-    resize: none;
-}
 a
 {
     display: block;
@@ -132,20 +125,27 @@ a
     height: 30px;
     width: 30px;
     background-size:30px 30px;
-    background-color: var(--icon-color);
     cursor:pointer;
     border: none;
     padding: 0;
     margin: 0;
-    border-radius: 3px;
+
+    background-color: var(--main-color);
 }
 #delete
 {
     width: 100%;
     height: 100%;
-    background-image: url(icons/delete.svg);
+    background-image: var(--delete-icon);
     background-position: center;
     background-repeat: no-repeat;
+}
+#edit
+{
+    background-image: url(icons/edit.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+        background-image: var(--edit-icon);
 }
 h1
 {
@@ -155,7 +155,10 @@ h1
 {
     display: flex;
     flex-flow: row nowrap ;
-
+}
+#settings a:hover
+{
+    color: color-mix(in xyz, var(--text-color-normal) 70%, var(--tile-color) 30%);
 }
 #settings a,p {
     flex-basis: 1;
@@ -163,6 +166,7 @@ h1
     flex-flow: row nowrap ;
     justify-content: center;
     align-items: center;
+    text-wrap: nowrap;
 }
 form
 {
@@ -175,12 +179,24 @@ form
     padding: 20px;
     width: fit-content;
     margin: 0 auto;
+    div label
+    {
+        vertical-align: center;
+    }
 }
-input[type="text"], input[type="password"]
+input[type="text"], input[type="password"],textarea
 {
     color: var(--text-color-normal);
+    background-color: color-mix(in srgb, var(--main-color) 80%, var(--text-color-normal) 20%);
     border-radius: 5px;
     border: none;
     border-bottom: 2px solid var(--text-color-normal);
-    background-color: color-mix(in srgb, var(--main-color) 80%, var(--text-color-normal) 20%);
+}
+textarea
+{
+    margin-top: 10px;
+    text-align: start;
+    width: 368px;
+    height: 217px;
+    resize: none;
 }
