@@ -1,5 +1,5 @@
 {
-  "name": "objektywnie",
+  "name": "obiektywnie",
   "version": "2.0.0",
   "description": "",
   "homepage": "https://github.com/Marcelunio/PZAW/tree/main/projekt05#readme",
@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "initialize": "node --run populate_db\n node --run generate_env\n node --run admin ",
+    "initialize": "npm run populate_db\n npm run generate_env\n npm run admin ",
     "dev": "node --watch --env-file .env ./index.js",
     "start": "node --env-file .env ./index.js",
     "populate_db": "node utils/PopulateDatabase.js",
