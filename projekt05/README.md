@@ -13,7 +13,7 @@ Forum internetowe o aparatach i sprzęcie fotograficznym.
 - Przełączanie motywu aplikacji
 
 ## Wymagania
-- Node.js 18+ (lub nowszy)
+- Node.js
 - npm
 
 ## Instalacja
